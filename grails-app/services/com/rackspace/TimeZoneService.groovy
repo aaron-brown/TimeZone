@@ -1,10 +1,16 @@
 package com.rackspace
 
-class TimeZoneService {
+import java.text.SimpleDateFormat
+import java.text.Format
+
+class TimeZoneService
+{
 
     static transactional = true
 
-    def serviceMethod() {
-
+    def getTime(def timezone)
+    {
+        def format = new SimpleDateFormat().setTimeZone(TimeZone.getTimeZone(timezone))
+        return format.format(new Date())
     }
 }
