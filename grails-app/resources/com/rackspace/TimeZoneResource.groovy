@@ -9,8 +9,8 @@ import javax.ws.rs.Get
 
 import static org.grails.jaxrs.response.Responses.*
 
-@consumes(['application/xml','application/json'])
-@produces(['application/xml','application/json'])
+@consumes(['text/plain'])
+@produces(['text/plain'])
 
 @Path('/api/tz')
 
