@@ -10,7 +10,8 @@ class TimeZoneService
 
     def getTime(def timezone)
     {
-        def format = new SimpleDateFormat().setTimeZone(TimeZone.getTimeZone(timezone))
+        def format = new SimpleDateFormat()
+        format.setTimeZone(TimeZone.getTimeZone(timezone))
         return format.format(new Date())
     }
 }
