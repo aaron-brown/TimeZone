@@ -11,20 +11,36 @@ import javax.ws.rs.core.Response
 
 import static org.grails.jaxrs.response.Responses.*
 
-@Consumes(['application/xml','applicaton/json'])
+@Consumes(['application/xml','application/json'])
 @Produces(['application/xml','application/json'])
 
 @Path('/api')
 
 class TimeZoneResource
 {
-    def TimeZoneResource
+    def TimeZoneService
     
     @GET
-    @Path('/')
-    Response returnCurrentTime(@QueryParam('timezone') String timezone)
+    @Path('/time')
+    Response getTime(@QueryParam('timezone') String timezone)
     {
-        def result = TimeZoneService.getTime(timezone)
+        def testValid = TimeZoneService.validateParam(timezone ?: 'US/Central')
+        def result
+        
+        if (testValid[0].getAt("errorFlag").equals("ok")) {
+            result = TimeZoneService.getTime(timezone ?: 'US/Central')
+        }
+        else {
+            result = testValid
+        }
+        ok result
+    }
+    
+    @GET
+    @Path('/timezonelist')
+    Response getTimeZoneList()
+    {
+        def result = TimeZoneService.getTimeZoneList()
         
         ok result
     }
